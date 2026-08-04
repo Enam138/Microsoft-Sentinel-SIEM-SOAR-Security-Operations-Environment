@@ -840,6 +840,463 @@ One principle guided the project from beginning to end:
 That is also why the limitations and unsuccessful troubleshooting attempts are documented alongside the successful implementation.
 
 
+
+## Project Documentation
+
+This repository contains detailed technical documentation covering the complete Microsoft Sentinel SIEM/SOAR implementation, from architecture and telemetry onboarding to threat hunting, detection engineering, security visualization, automation, validation, and troubleshooting.
+
+The documentation is organized so that each major security operations capability can be reviewed independently while still forming part of the complete SOC workflow.
+
+### Technical Documentation
+
+| Document | Description |
+|---|---|
+| [Architecture](docs/Architecture.md) | Overall Microsoft Sentinel SIEM/SOAR architecture, security components, telemetry flow, and design decisions. |
+| [Deployment Guide](docs/DeploymentGuide.md) | Step-by-step deployment and configuration of the Sentinel security operations environment. |
+| [Data Connectors](docs/DataConnectors.md) | Telemetry sources, Log Analytics integration, diagnostic data, and connector configuration. |
+| [KQL Queries](docs/KQLQueries.md) | Custom Kusto Query Language queries used for Key Vault investigation, failed-operation detection, and activity analysis. |
+| [Analytics Rules](docs/AnalyticsRules.md) | Detection engineering implementation, analytics-rule selection, configuration, and validation. |
+| [Incident Management](docs/IncidentManagement.md) | Sentinel incident lifecycle, investigation capabilities, triage process, and incident-handling design. |
+| [Threat Hunting](docs/ThreatHunting.md) | Structured Azure Key Vault threat hunt, hypothesis development, KQL execution, evidence analysis, and investigation outcome. |
+| [MITRE ATT&CK Mapping](docs/MITRE-ATTACK-Mapping.md) | ATT&CK coverage analysis including Persistence, Lateral Movement, and technique-level security context. |
+| [Workbooks](docs/Workbooks.md) | Azure Key Vault Security workbook configuration, visualization, troubleshooting, and validation. |
+| [SOAR Automation](docs/SOAR-Automation.md) | Native Sentinel automation and Azure Logic Apps implementation using `MDTI-Automated-Triage`, managed identity, and RBAC. |
+| [Validation Report](docs/ValidationReport.md) | Evidence-based validation of implemented, tested, partially validated, and environment-limited capabilities. |
+| [Troubleshooting](docs/Troubleshooting.md) | Technical problems encountered during implementation, root-cause analysis, resolutions, and operational lessons. |
+| [Lessons Learned](docs/LessonsLearned.md) | Security engineering and SOC lessons derived from building and validating the environment. |
+
+
+## Documentation Flow
+
+The documentation follows the same lifecycle as the implemented security operations architecture:
+
+```text
+Architecture
+     |
+     v
+Deployment
+     |
+     v
+Data Collection
+     |
+     v
+KQL Investigation
+     |
+     v
+Detection Engineering
+     |
+     v
+Threat Hunting
+     |
+     v
+MITRE ATT&CK
+     |
+     v
+Incident Management
+     |
+     v
+Security Visualization
+     |
+     v
+SOAR Automation
+     |
+     v
+Validation
+     |
+     v
+Troubleshooting
+     |
+     v
+Lessons Learned
+```
+
+This structure allows the repository to document not only what was deployed, but how the environment was investigated, validated, automated, and evaluated.
+
+
+## Evidence and Screenshots
+
+Implementation evidence is organized by security capability.
+
+```text
+images/
+│
+├── architecture/
+│
+├── deployment/
+│
+├── connectors/
+│
+├── kql/
+│
+├── analytics/
+│
+├── incidents/
+│
+├── hunting/
+│
+├── mitre/
+│
+├── workbooks/
+│
+├── soar/
+└── troubleshooting/
+```
+
+Screenshots captured during implementation provide supporting evidence for major project milestones including:
+
+- Microsoft Sentinel deployment and configuration
+- Log Analytics telemetry discovery
+- Azure Key Vault diagnostic telemetry
+- KQL investigation results
+- Analytics-rule configuration
+- Threat-hunting queries and results
+- MITRE ATT&CK coverage
+- Incident-management interface
+- Azure Key Vault Security workbook
+- Sentinel automation rule
+- Azure Logic Apps playbook
+- System-assigned managed identity
+- Azure RBAC configuration
+- Successful Sentinel trigger execution
+
+Sensitive information should be reviewed and removed or masked before screenshots are committed to the public repository.
+
+
+## Implementation Validation
+
+The project was validated at multiple levels rather than treating resource deployment as proof of operational functionality.
+
+| Capability | Validation |
+|---|---|
+| Microsoft Sentinel | Validated |
+| Log Analytics telemetry | Validated |
+| Azure Key Vault telemetry | Validated |
+| Custom KQL queries | Validated |
+| Structured threat hunting | Validated |
+| Analytics rule | Validated |
+| MITRE ATT&CK mapping | Validated |
+| Key Vault Security workbook | Validated |
+| Native incident automation | Configured |
+| MDTI Logic App deployment | Validated |
+| Microsoft Sentinel connection | Validated |
+| System-assigned managed identity | Validated |
+| Microsoft Sentinel Contributor RBAC | Validated |
+| Sentinel Logic App trigger | Validated |
+| Full MDTI enrichment | Partially validated |
+| Live incident investigation | Limited by available telemetry |
+| Automated containment | Not implemented |
+
+For the complete testing methodology and evidence boundaries, see:
+
+**[Full Validation Report](docs/ValidationReport.md)**
+
+## Key Technical Outcomes
+
+The completed implementation demonstrated:
+
+- Deployment and configuration of Microsoft Sentinel as a cloud-native SIEM/SOAR platform
+- Integration with a Log Analytics workspace
+- Collection and investigation of Azure Key Vault telemetry
+- Development of custom KQL security queries
+- Creation of a structured Sentinel threat hunt
+- Hypothesis-driven security investigation
+- Analytics-rule implementation
+- MITRE ATT&CK coverage analysis
+- Security visualization using Sentinel Workbooks
+- Native Sentinel incident automation
+- Azure Logic Apps SOAR deployment
+- Microsoft Sentinel playbook integration
+- System-assigned managed identity configuration
+- Azure RBAC authorization
+- Security automation troubleshooting
+- Evidence-based implementation validation
+
+
+## Key Project Metrics
+
+| Metric | Result |
+|---|---:|
+| Custom KQL investigation queries | 3 |
+| Key Vault events investigated | 4 |
+| Failed Key Vault operations identified | 0 |
+| Structured Sentinel Hunts | 1 |
+| Queries included in Hunt | 3 |
+| Active analytics rule implemented | 1 |
+| ATT&CK tactics observed in rule coverage | 2 |
+| Security workbook configured | 1 |
+| Native automation rule created | 1 |
+| Advanced Logic App playbook deployed | 1 |
+| Managed identities configured for playbook | 1 |
+| Sentinel RBAC role assignments added | 1 |
+| Sentinel trigger validation | Successful |
+
+These metrics represent the implemented lab environment and should not be interpreted as production SOC performance metrics.
+
+## Security Engineering Principles Applied
+
+Several principles guided the implementation:
+
+### Telemetry Before Detection
+
+Detection logic was developed only after confirming the underlying telemetry.
+
+### Evidence-Based Investigation
+
+Security conclusions were based on observed events rather than assumptions.
+
+### Relevant Detection Coverage
+
+Analytics templates without supporting workloads or telemetry were not enabled simply to increase rule count.
+
+### Least Privilege
+
+The Logic App used a system-assigned managed identity and a Sentinel-specific RBAC assignment instead of unnecessarily broad Azure permissions.
+
+### Human-in-the-Loop SOAR
+
+Automation was used to support triage and investigation while keeping high-impact security decisions under analyst control.
+
+### Transparent Validation
+
+Configured, validated, partially validated, and environment-limited capabilities are clearly distinguished throughout the documentation.
+
+## Known Environment Limitations
+
+The project was implemented in a controlled Azure lab environment.
+
+Several limitations affected the depth of testing:
+
+- Limited Key Vault telemetry volume
+- No applicable active Sentinel incident during primary validation
+- No supporting RDP/SSH workloads for the available RDP and SSH analytics templates
+- Microsoft Entra role eligibility required Microsoft Entra ID P2 or Microsoft Entra ID Governance
+- Additional permission requirements affected complete MDTI enrichment validation
+- Automated containment actions were intentionally excluded
+
+These limitations are documented in detail in:
+
+- [Validation Report](docs/ValidationReport.md)
+- [Troubleshooting](docs/Troubleshooting.md)
+- [Lessons Learned](docs/LessonsLearned.md)
+
+## Repository Structure
+
+```text
+microsoft-sentinel-siem-soar/
+│
+├── README.md
+│
+├── docs/
+│   ├── Architecture.md
+│   ├── DeploymentGuide.md
+│   ├── DataConnectors.md
+│   ├── KQLQueries.md
+│   ├── AnalyticsRules.md
+│   ├── IncidentManagement.md
+│   ├── ThreatHunting.md
+│   ├── MITRE-ATTACK-Mapping.md
+│   ├── Workbooks.md
+│   ├── SOAR-Automation.md
+│   ├── ValidationReport.md
+│   ├── Troubleshooting.md
+│   └── LessonsLearned.md
+│
+├── queries/
+│   ├── key-vault-activity.kql
+│   ├── failed-key-vault-operations.kql
+│   └── key-vault-activity-frequency.kql
+│
+└── images/
+    ├── architecture/
+    ├── deployment/
+    ├── connectors/
+    ├── kql/
+    ├── analytics/
+    ├── incidents/
+    ├── hunting/
+    ├── mitre/
+    ├── workbooks/
+    ├── soar/
+    └── troubleshooting/
+```
+
+## KQL Query Library
+
+The custom queries developed during the investigation are also maintained separately under:
+
+```text
+queries/
+```
+
+This makes the detection and hunting logic reusable without requiring analysts to extract queries from the documentation.
+
+### 1. Azure Key Vault Activity
+
+File:
+
+```text
+queries/key-vault-activity.kql
+```
+
+```kusto
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| project
+    TimeGenerated,
+    ResourceGroup,
+    ResourceProvider,
+    Resource,
+    ResourceType,
+    OperationName,
+    ResultType
+| order by TimeGenerated desc
+```
+
+### 2. Failed Azure Key Vault Operations
+
+File:
+
+```text
+queries/failed-key-vault-operations.kql
+```
+
+```kusto
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| where ResultType !in~ ("Success", "Succeeded")
+| project
+    TimeGenerated,
+    ResourceGroup,
+    Resource,
+    OperationName,
+    ResultType
+| order by TimeGenerated desc
+```
+
+### 3. Azure Key Vault Activity Frequency
+
+File:
+
+```text
+queries/key-vault-activity-frequency.kql
+```
+
+```kusto
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| summarize EventCount = count() by Resource, OperationName, ResultType
+| order by EventCount desc
+```
+
+
+## Project Scope
+
+This project demonstrates a practical Microsoft Sentinel security operations implementation focused on:
+
+```text
+SIEM
++
+Detection Engineering
++
+Threat Hunting
++
+MITRE ATT&CK
++
+Security Visualization
++
+Incident Management
++
+SOAR
++
+Cloud Identity and RBAC
+```
+
+The objective was not to simulate a fully staffed enterprise SOC or claim production readiness.
+
+The objective was to build, configure, investigate, troubleshoot, and validate the core technologies and workflows used in a modern Microsoft Sentinel-based security operations environment.
+
+---
+
+## Final Project Status
+
+```text
+Microsoft Sentinel SIEM:
+Implemented
+
+Azure Telemetry Collection:
+Validated
+
+KQL Investigation:
+Validated
+
+Threat Hunting:
+Validated
+
+Detection Engineering:
+Implemented
+
+MITRE ATT&CK Mapping:
+Validated
+
+Security Visualization:
+Validated
+
+Incident Workflow:
+Configured
+
+Native SOAR:
+Configured
+
+Azure Logic Apps SOAR:
+Implemented
+
+Managed Identity:
+Configured
+
+Azure RBAC:
+Configured
+
+Sentinel Trigger:
+Successfully Tested
+
+Documentation:
+Completed
+
+Validation:
+Completed
+```
+
+The final environment demonstrates the complete security operations lifecycle:
+
+```text
+COLLECT
+   |
+   v
+ANALYZE
+   |
+   v
+DETECT
+   |
+   v
+HUNT
+   |
+   v
+INVESTIGATE
+   |
+   v
+VISUALIZE
+   |
+   v
+AUTOMATE
+   |
+   v
+RESPOND
+   |
+   v
+IMPROVE
+```
+
+
 ## Connect
 
 I'm continuing to build hands-on projects around cloud security, security operations, threat detection, SIEM/SOAR, and Microsoft security technologies.
