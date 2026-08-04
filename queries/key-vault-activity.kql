@@ -1,1 +1,14 @@
+// Azure Key Vault Activity Monitoring
+// Retrieves Key Vault diagnostic events for security investigation.
 
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| project
+    TimeGenerated,
+    ResourceGroup,
+    ResourceProvider,
+    Resource,
+    ResourceType,
+    OperationName,
+    ResultType
+| order by TimeGenerated desc
