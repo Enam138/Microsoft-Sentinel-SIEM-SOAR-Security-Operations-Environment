@@ -1,1 +1,7 @@
+// Azure Key Vault Activity Frequency Analysis
+// Summarizes Key Vault operations to identify activity patterns.
 
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| summarize EventCount = count() by Resource, OperationName, ResultType
+| order by EventCount desc
