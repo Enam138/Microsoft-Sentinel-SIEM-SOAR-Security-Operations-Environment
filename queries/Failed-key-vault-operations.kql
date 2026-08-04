@@ -1,0 +1,13 @@
+// Failed Azure Key Vault Operations
+// Identifies unsuccessful Key Vault operations for further investigation.
+
+AzureDiagnostics
+| where ResourceProvider =~ "MICROSOFT.KEYVAULT"
+| where ResultType !in~ ("Success", "Succeeded")
+| project
+    TimeGenerated,
+    ResourceGroup,
+    Resource,
+    OperationName,
+    ResultType
+| order by TimeGenerated desc
